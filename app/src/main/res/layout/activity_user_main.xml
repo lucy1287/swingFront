@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserMainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_roadkill_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/iv_roadkill_report"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/roadkill_receipt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_roadkill_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="사고 접수"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_roadkill_report"
+            app:layout_constraintTop_toTopOf="@id/iv_roadkill_report" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="로드킬 사고 발생/목격 시 신고하기"
+            app:layout_constraintStart_toEndOf="@id/iv_roadkill_report"
+            app:layout_constraintTop_toBottomOf="@+id/tv_roadkill_report"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_eco_corridor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_roadkill_report"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/iv_eco_corridor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/eco_corridor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_eco_corridor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="생태통로"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_eco_corridor"
+            app:layout_constraintTop_toTopOf="@id/iv_eco_corridor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="로드킬 위치 및 생태통로 위치 한눈에 보기"
+            app:layout_constraintStart_toEndOf="@id/iv_eco_corridor"
+            app:layout_constraintTop_toBottomOf="@+id/tv_eco_corridor"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
