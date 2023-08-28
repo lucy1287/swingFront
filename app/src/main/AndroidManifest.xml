@@ -35,10 +35,7 @@
             android:name=".UserMainActivity"
             android:exported="false">
         </activity>
-        <activity
-            android:name=".UserReportDetailActivity"
-            android:exported="false">
-        </activity>
+
         <activity
             android:name=".UserMapActivity"
             android:exported="false">
@@ -61,6 +58,34 @@
         </activity>
         <activity
             android:name=".ManagerCertificationActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".TimeActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".TimeDetailActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MapDetailActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".UserReportActivity"
             android:exported="false">
         </activity>
 

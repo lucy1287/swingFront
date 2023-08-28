@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
             if(id == "10000" && password == "1234") {
                 Toast.makeText(this, "사용자로 로그인 되었습니다", Toast.LENGTH_SHORT).show()
-                val intent = Intent(applicationContext, UserMainActivity::class.java)
+                val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
             }
             else if(id == "20000" && password == "1234") {

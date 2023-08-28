@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roadkill.databinding.ItemUserImageBinding
 import kotlin.collections.ArrayList
 
-class ReportImageRVAdapter(private var imageList: ArrayList<*>, private val activity: UserReportDetailActivity) :
+class ReportImageRVAdapter(private var imageList: ArrayList<*>, private val activity: UserReportActivity) :
     RecyclerView.Adapter<ReportImageRVAdapter.ViewHolder>() {
     inner class ViewHolder(binding: ItemUserImageBinding) :
         RecyclerView.ViewHolder(binding.root) {

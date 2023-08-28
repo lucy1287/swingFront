@@ -1,21 +1,21 @@
 package com.example.roadkill
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.roadkill.databinding.ActivityMainBinding
 import com.example.roadkill.databinding.ActivityUserMainBinding
 
-class UserMainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityUserMainBinding
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onStart() {
         super.onStart()
@@ -25,21 +25,26 @@ class UserMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUserMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         requestPermission()
 
         binding.clRoadkillReport.setOnClickListener{
-            val intent = Intent(applicationContext, UserReportActivity::class.java)
+            val intent = Intent(applicationContext, TimeActivity::class.java)
             startActivity(intent)
         }
 
-        binding.clEcoCorridor.setOnClickListener{
-            val intent = Intent(applicationContext, UserMapActivity::class.java)
+        binding.clSmallAnimal.setOnClickListener{
+            val intent = Intent(applicationContext, TimeActivity::class.java)
             startActivity(intent)
         }
 
-       // initNavigationBar() //네이게이션 바의 각 메뉴 탭을 눌렀을 때 화면이 전환되도록 하는 함수.
+        binding.clBigAnimal.setOnClickListener{
+            val intent = Intent(applicationContext, TimeActivity::class.java)
+            startActivity(intent)
+        }
+
+        // initNavigationBar() //네이게이션 바의 각 메뉴 탭을 눌렀을 때 화면이 전환되도록 하는 함수.
     }
 
     // 안드로이드 API 30 버전부터는 backgroundPermission 을 직접 설정해야함
@@ -80,8 +85,8 @@ class UserMainActivity : AppCompatActivity() {
     }
 
     private fun hasLocationPermissions(): Boolean {
-        val permission1 = ACCESS_FINE_LOCATION
-        val permission2 = ACCESS_COARSE_LOCATION
+        val permission1 = Manifest.permission.ACCESS_FINE_LOCATION
+        val permission2 = Manifest.permission.ACCESS_COARSE_LOCATION
 
         return (ActivityCompat.checkSelfPermission(this, permission1) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, permission2) == PackageManager.PERMISSION_GRANTED)
