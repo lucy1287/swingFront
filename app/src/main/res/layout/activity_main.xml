@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            android:text="여우, 고양이, 비둘기 등"
+            android:text="여우, 고양이 등"
             app:layout_constraintStart_toEndOf="@id/iv_small_animal"
             app:layout_constraintTop_toBottomOf="@+id/tv_small_animal"
             app:layout_constraintBottom_toBottomOf="parent"/>

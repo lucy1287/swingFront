@@ -3,25 +3,43 @@ package com.example.roadkill
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.roadkill.api.RegisterService
+import com.example.roadkill.api.ReportRequest
+import com.example.roadkill.api.ReportService
 import com.example.roadkill.databinding.ActivityUserReportBinding
 import com.example.roadkill.databinding.ActivityUserReportDetailBinding
 import com.google.android.gms.location.LocationServices
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 import java.text.SimpleDateFormat
 
 class UserReportActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserReportBinding
     var reportImageList: ArrayList<Uri?> = ArrayList<Uri?>()
     lateinit var reportImageRVAdapter: ReportImageRVAdapter
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
+
 
     override fun onStart() {
         super.onStart()
@@ -59,6 +77,7 @@ class UserReportActivity : AppCompatActivity() {
 
         //요청하기 버튼
         binding.tvBtnOk.setOnClickListener{
+                postReportFun()
                 Toast.makeText(applicationContext, "요청이 접수되었습니다", Toast.LENGTH_SHORT).show()
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
@@ -91,6 +110,8 @@ class UserReportActivity : AppCompatActivity() {
                 success?.let { location ->
                     textView.text =
                         "${location.latitude}, ${location.longitude}"
+                    lat = location.latitude
+                    lng = location.longitude
                 }
             }
             .addOnFailureListener { fail ->
@@ -155,4 +176,57 @@ class UserReportActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun postReportFun() {
+        val img: Uri = reportImageList[0]!!
+        val lat = lat
+        val lng = lng
+
+        val apiService = ApiClient.create(ReportService::class.java)
+
+// 네트워크 요청 및 응답 처리
+        val filePath = getRealPathFromUri(this, img)
+        Log.d("파일경로", filePath.toString())
+        val file = File(filePath)
+        val requestFile = file.asRequestBody("image/*".toMediaType())
+        val imagePart = MultipartBody.Part.createFormData("img", file.name, requestFile)
+
+        val call = apiService.postReport(
+            img = imagePart,
+            lat = 123.456,
+            lng = 789.012,
+            species = "some_species",
+            cause = "some_cause",
+            otherInfo = "additional_info",
+            status = false,
+        )
+        call.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    val responseData = response.body()
+                    println("신고 성공: $responseData")
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    println("신고 실패: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.e("TAG", "실패원인: $t")
+            }
+        })
+    }
+
+    fun getRealPathFromUri(context: Context, uri: Uri): String? {
+        var filePath: String? = null
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            filePath = it.getString(columnIndex)
+        }
+        return filePath
+    }
+
 }

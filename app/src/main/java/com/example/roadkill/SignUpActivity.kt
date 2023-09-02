@@ -101,6 +101,6 @@ class SignUpActivity : AppCompatActivity() {
                 Log.e("TAG", "실패원인: $t")
             }
         })
-        }
+    }
 
 }
