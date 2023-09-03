@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_roadkill_report"
+        android:id="@+id/cl_nearmiss_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent "
@@ -18,7 +18,7 @@
         android:layout_marginHorizontal="20dp">
 
         <ImageView
-            android:id="@+id/iv_roadkill_report"
+            android:id="@+id/iv_nearmiss_report"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="20dp"
@@ -28,15 +28,15 @@
 
 
         <TextView
-            android:id="@+id/tv_roadkill_report"
+            android:id="@+id/tv_nearmiss_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:text="사고 위험"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_roadkill_report"
-            app:layout_constraintTop_toTopOf="@id/iv_roadkill_report" />
+            app:layout_constraintStart_toEndOf="@id/iv_nearmiss_report"
+            app:layout_constraintTop_toTopOf="@id/iv_nearmiss_report" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
             android:text="로드킬 사고 발생할 뻔 했을 때"
-            app:layout_constraintStart_toEndOf="@id/iv_roadkill_report"
-            app:layout_constraintTop_toBottomOf="@+id/tv_roadkill_report"
+            app:layout_constraintStart_toEndOf="@id/iv_nearmiss_report"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nearmiss_report"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_roadkill_report"
+        app:layout_constraintTop_toBottomOf="@+id/cl_nearmiss_report"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="50dp">
 

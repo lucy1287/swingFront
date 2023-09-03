@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         requestPermission()
 
-        binding.clRoadkillReport.setOnClickListener{
-            val intent = Intent(applicationContext, TimeActivity::class.java)
+        binding.clNearmissReport.setOnClickListener{
+            val intent = Intent(applicationContext, UserNearmissReportActivity::class.java)
             startActivity(intent)
         }
 

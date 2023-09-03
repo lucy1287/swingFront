@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".UserMyReportActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,6 +88,19 @@
             android:name=".UserReportActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".NearmissTimeActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".NearmissTimeDetailActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".UserNearmissReportActivity"
+            android:exported="false">
+        </activity>
+
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="670c7b51689dfd6ee61c44079bc0b128"/>
     </application>
