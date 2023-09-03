@@ -28,12 +28,12 @@ class MapActivity : AppCompatActivity() {
         mapView = binding.mapView
         mapView.setDaumMapApiKey("baafde3b7e2b0ca2301e515aac5d1492")
 
-        // getLocation()
+         getLocation()
 
-//        val mapPoint = MapPoint.mapPointWithGeoCoord(nowLatitude, nowLongitude)
-//        mapView.setMapCenterPoint(mapPoint, true)
-//        mapView.setZoomLevel(3, true) // 초기 줌 레벨 설정
-//        mapView.invalidate()
+         val mapPoint = MapPoint.mapPointWithGeoCoord(nowLatitude, nowLongitude)
+         mapView.setMapCenterPoint(mapPoint, true)
+         mapView.setZoomLevel(3, true) // 초기 줌 레벨 설정
+         mapView.invalidate()
 
         binding.tvBtn1.setOnClickListener{
             binding.root.removeAllViews()
