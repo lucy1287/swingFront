@@ -15,7 +15,7 @@ import javax.net.ssl.SSLSocketFactory
 
 object ApiClient {
     private const val BASE_URL =
-        "https://port-0-swingback-54ouz2llluriii0.sel3.cloudtype.app/"
+        "http://172.20.18.57:3000/"
 
     //HTTP 통신시 통신 정보를 인터셉트하여 로그로 출력
     private val okHttpClient = OkHttpClient.Builder()
