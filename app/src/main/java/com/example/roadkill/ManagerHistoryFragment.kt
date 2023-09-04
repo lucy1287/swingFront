@@ -19,8 +19,8 @@ class ManagerHistoryFragment : Fragment() {
     ): View? {
         binding = FragmentManagerHistoryBinding.inflate(layoutInflater)
 
-        accidentHistoryList.add(History("2023-07-20", "중부내륙고속도로"))
-        accidentHistoryList.add(History("2023-07-21", "호남선"))
+        accidentHistoryList.add(History("ㄴㅇㄴ", "2023-07-20", "중부내륙고속도로"))
+        accidentHistoryList.add(History("낸", "2023-07-21", "호남선"))
 
         val managerHistoryRVAdapter = ManagerHistoryRVAdapter(accidentHistoryList)
         managerHistoryRVAdapter.setOnItemClickListener(object : ManagerHistoryRVAdapter.OnItemClickListener {

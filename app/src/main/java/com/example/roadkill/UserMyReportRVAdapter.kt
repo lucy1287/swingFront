@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roadkill.databinding.ItemManagerHistoryBinding
 
-class ManagerHistoryRVAdapter(private var accidentHistoryList: ArrayList<*>) :
-    RecyclerView.Adapter<ManagerHistoryRVAdapter.ViewHolder>() {
+class UserMyReportRVAdapter(private var accidentHistoryList: ArrayList<*>) :
+    RecyclerView.Adapter<UserMyReportRVAdapter.ViewHolder>() {
     inner class ViewHolder(binding: ItemManagerHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var date: TextView
@@ -41,7 +41,7 @@ class ManagerHistoryRVAdapter(private var accidentHistoryList: ArrayList<*>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // holder.onBind(videoList.get(position));
+        holder.onBind(accidentHistoryList[position] as History);
     }
 
     fun setImageList(list: ArrayList<*>) {

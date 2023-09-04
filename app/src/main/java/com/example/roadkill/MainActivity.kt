@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.ivMenu.setOnClickListener {
+            val intent = Intent(applicationContext, UserMyReportActivity::class.java)
+            startActivity(intent)
+        }
+
         // initNavigationBar() //네이게이션 바의 각 메뉴 탭을 눌렀을 때 화면이 전환되도록 하는 함수.
     }
 

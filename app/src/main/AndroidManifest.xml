@@ -100,6 +100,14 @@
             android:name=".UserNearmissReportActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".UserMyReportActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".UserMyReportDetailActivity"
+            android:exported="false">
+        </activity>
 
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="670c7b51689dfd6ee61c44079bc0b128"/>
