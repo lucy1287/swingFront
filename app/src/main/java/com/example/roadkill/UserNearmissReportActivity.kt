@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.roadkill.api.MyReportResponse
 import com.example.roadkill.api.NearmissRequest
 import com.example.roadkill.api.NearmissService
 import com.example.roadkill.databinding.ActivityUserNearmissReportBinding
@@ -96,7 +97,7 @@ class UserNearmissReportActivity : AppCompatActivity() {
         var nearmissJson = NearmissRequest(size, lat, lng)
         Log.d("dsds", nearmissJson.toString())
 
-        NearmissService.retrofitPostNearmissReport(nearmissJson)
+        NearmissService.retrofitPostNearmissReport(nearmissJson, MyApplication.prefs.getString("id", "no id"))
             .enqueue(object : Callback<String> { // 응답 타입을 String으로 지정
                 override fun onResponse(
                     call: Call<String>,

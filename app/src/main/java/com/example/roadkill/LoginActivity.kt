@@ -70,6 +70,9 @@ class LoginActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val responseData = response.body()
                         println("로그인 성공: $responseData")
+                        Log.d("id1", responseData.toString().trim('"'))
+                        MyApplication.prefs.setString("id", responseData.toString().trim('"'))
+                        Log.d("id2", MyApplication.prefs.getString("id", "no id"))
                     } else {
                         val errorBody = response.errorBody()?.string()
                         println("로그인 실패: $errorBody")

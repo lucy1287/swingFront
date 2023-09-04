@@ -4,18 +4,20 @@ import com.example.roadkill.ApiClient
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface NearmissService {
 
-    @POST("/reports/nearmiss/64ec86f06a0e3e3b3893f0b7")
+    @POST("/reports/nearmiss/{id}")
     fun postNearmissReport(
-        @Body jsonParams: NearmissRequest
+        @Body jsonParams: NearmissRequest,
+        @Path("id") id: String
     ): Call<String>
 
     companion object{
 
-        fun retrofitPostNearmissReport(jsonParams: NearmissRequest): Call<String> {
-            return ApiClient.create(NearmissService::class.java).postNearmissReport(jsonParams)
+        fun retrofitPostNearmissReport(jsonParams: NearmissRequest, id: String): Call<String> {
+            return ApiClient.create(NearmissService::class.java).postNearmissReport(jsonParams, id)
         }
 
     }

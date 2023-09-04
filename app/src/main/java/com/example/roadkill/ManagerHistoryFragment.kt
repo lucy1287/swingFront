@@ -65,25 +65,27 @@ class ManagerHistoryFragment : Fragment() {
                     if (managerReports != null) {
                         // JSON 배열을 반복하여 각각의 MyReportResponse 객체를 처리할 수 있습니다.
                         for (report in managerReports) {
-                            val imgPart = ApiClient.BASE_URL + report.img.replace("\\", "/")
-                            //Glide.with(this@UserMyReportActivity) // YourActivity를 현재 활성화된 액티비티로 변경해야 합니다.
-                            //    .load(imgPart) // MultipartBody.Part에서 이미지를 로드합니다.
-                            //    .diskCacheStrategy(DiskCacheStrategy.NONE) // 캐시 사용하지 않음 (선택 사항)
-                            //   .skipMemoryCache(true) // 메모리 캐시 사용하지 않음 (선택 사항)
-                            //    .into(binding.imageView) // 이미지를 표시할 ImageView
+                            if(!report.status) {
+                                val imgPart = ApiClient.BASE_URL + report.img.replace("\\", "/")
+                                //Glide.with(this@UserMyReportActivity) // YourActivity를 현재 활성화된 액티비티로 변경해야 합니다.
+                                //    .load(imgPart) // MultipartBody.Part에서 이미지를 로드합니다.
+                                //    .diskCacheStrategy(DiskCacheStrategy.NONE) // 캐시 사용하지 않음 (선택 사항)
+                                //   .skipMemoryCache(true) // 메모리 캐시 사용하지 않음 (선택 사항)
+                                //    .into(binding.imageView) // 이미지를 표시할 ImageView
 
-                            val _id = report._id
-                            val lat = report.lat
-                            val lng = report.lng
-                            val species = report.species
-                            val cause = report.cause
-                            val otherInfo = report.otherInfo
-                            val status = report.status
-                            val accidentTime = report.accidentTime
-                            // 여기에서 데이터를 사용하세요.
-                            accidentHistoryList.add(History(_id, accidentTime, species))
-                            Log.d("accidentHistoryList", accidentHistoryList.toString())
-                            managerHistoryRVAdapter.notifyDataSetChanged();
+                                val _id = report._id
+                                val lat = report.lat
+                                val lng = report.lng
+                                val species = report.species
+                                val cause = report.cause
+                                val otherInfo = report.otherInfo
+                                val status = report.status
+                                val accidentTime = report.accidentTime
+                                // 여기에서 데이터를 사용하세요.
+                                accidentHistoryList.add(History(_id, accidentTime, species))
+                                Log.d("accidentHistoryList", accidentHistoryList.toString())
+                                managerHistoryRVAdapter.notifyDataSetChanged();
+                            }
                         }
                     } else {
                         try {

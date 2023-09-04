@@ -10,7 +10,7 @@ class StatusVPAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> ManagerHistoryFragment()
-            1 -> ManagerHistoryFragment()
+            1 -> ManagerHistoryFragmentTrue()
             else -> Fragment()
         }
     }

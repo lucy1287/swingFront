@@ -193,6 +193,7 @@ class UserReportActivity : AppCompatActivity() {
             cause = "some_cause",
             otherInfo = "additional_info",
             status = false,
+            MyApplication.prefs.getString("id", "no id")
         )
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {

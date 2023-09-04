@@ -49,7 +49,7 @@ class UserMyReportActivity: AppCompatActivity() {
 
     private fun getMyReportFun(){
         //var email=binding.etSignupEmailleft.text.toString()+binding.etSignupEmailright.text.toString()
-        ReportService.retrofitGetMyReport().enqueue(object: Callback<List<MyReportResponse>> {
+        ReportService.retrofitGetMyReport(MyApplication.prefs.getString("id", "no id")).enqueue(object: Callback<List<MyReportResponse>> {
             override fun onResponse(
                 call:  Call<List<MyReportResponse>>,
                 response: Response<List<MyReportResponse>>
