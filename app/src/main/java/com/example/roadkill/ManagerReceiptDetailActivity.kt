@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.roadkill.api.ManagerUpdateRequest
 import com.example.roadkill.api.MyReportResponse
 import com.example.roadkill.api.ReportService
 import com.example.roadkill.databinding.ActivityManagerReceiptDetailBinding
@@ -22,8 +23,9 @@ import retrofit2.Response
 
 class ManagerReceiptDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityManagerReceiptDetailBinding
-    var receiptImageList: ArrayList<Uri?> = ArrayList<Uri?>()
-    lateinit var receiptImageRVAdapter: ReceiptImageRVAdapter
+    private var receiptImageList: ArrayList<Uri?> = ArrayList<Uri?>()
+    private lateinit var receiptImageRVAdapter: ReceiptImageRVAdapter
+    private lateinit var rid: String
 
     override fun onStart() {
         super.onStart()
@@ -36,13 +38,14 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         //RequestPermissionsUtil(this).requestLocation()
 
-        val rid = intent.getStringExtra("rid")
+        rid = intent.getStringExtra("rid").toString()
         if (rid != null) {
             getManagerDetailFun(rid)
         }
 
         //처리하기 버튼
         binding.tvBtnOk.setOnClickListener{
+                postManagerUpdate(rid)
                 Toast.makeText(applicationContext, "처리가 완료되었습니다", Toast.LENGTH_SHORT).show()
                 val intent = Intent(applicationContext, UserMainActivity::class.java)
                 startActivity(intent)
@@ -100,6 +103,33 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
                 }
             })
     }
+
+    private fun postManagerUpdate(rid: String) {
+        var managerUpdateJson = ManagerUpdateRequest("some species", "no", "", true)
+
+        ReportService.retrofitPostManagerUpdate(managerUpdateJson, rid)
+            .enqueue(object : Callback<String> { // 응답 타입을 String으로 지정
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseData = response.body()
+                        println("업데이트 성공: $responseData")
+
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        println("업데이트 실패: $errorBody")
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.e("TAG", "실패원인: $t")
+                }
+            })
+    }
+
+
 }
 
 

@@ -41,8 +41,9 @@ interface ReportService {
     fun getManagerReport(
     ):Call<List<ManagerReportResponse>>
 
-    @POST("update/{rid}")
-    fun postStatusUpdate(
+    @POST("reports/update/{rid}")
+    fun postManagerUpdate(
+        @Body jsonParams: ManagerUpdateRequest,
         @Path("rid") _id: String
     ):Call<String>
 
@@ -61,6 +62,10 @@ interface ReportService {
 
         fun retrofitGetManagerReport(): Call<List<ManagerReportResponse>> {
             return ApiClient.create(ReportService::class.java).getManagerReport()
+        }
+
+        fun retrofitPostManagerUpdate(jsonParams: ManagerUpdateRequest, rid: String): Call<String>{
+            return ApiClient.create(ReportService::class.java).postManagerUpdate(jsonParams, rid)
         }
     }
 

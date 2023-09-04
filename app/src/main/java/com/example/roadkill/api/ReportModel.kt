@@ -49,3 +49,10 @@ data class ManagerReportResponse(
     @SerializedName("status") val status: Boolean,
     @SerializedName("accidentTime") val accidentTime: String
 )
+
+data class ManagerUpdateRequest(
+    @SerializedName("species") val species: String,
+    @SerializedName("cause") val cause: String,
+    @SerializedName("otherInfoByStaff") val otherInfoByStaff: String,
+    @SerializedName("status") val status: Boolean,
+)
