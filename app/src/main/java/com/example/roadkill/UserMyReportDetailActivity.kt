@@ -29,7 +29,7 @@ class UserMyReportDetailActivity: AppCompatActivity() {
 
     private fun postMyReportDetailFun(_id: String) {
 
-        ReportService.retrofitGetMyReportDetail()
+        ReportService.retrofitGetReportDetail()
             .enqueue(object : Callback<MyReportResponse> { // 응답 타입을 String으로 지정
                 override fun onResponse(
                     call: Call<MyReportResponse>,

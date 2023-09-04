@@ -41,7 +41,7 @@ class ManagerHistoryRVAdapter(private var accidentHistoryList: ArrayList<*>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // holder.onBind(videoList.get(position));
+        holder.onBind(accidentHistoryList[position] as History);
     }
 
     fun setImageList(list: ArrayList<*>) {
