@@ -31,8 +31,9 @@ interface ReportService {
         @Path("id") id: String
     ):Call<List<MyReportResponse>>
 
-    @GET("reports/post/64f5064b4c800865985dc2ca")
+    @GET("reports/post/{rid}")
     fun getReportDetail(
+        @Path("rid") rid: String
     ):Call<MyReportResponse>
 
     //관리자
@@ -40,8 +41,9 @@ interface ReportService {
     fun getManagerReport(
     ):Call<List<ManagerReportResponse>>
 
-    @POST("update/64f5064b4c800865985dc2ca")
+    @POST("update/{rid}")
     fun postStatusUpdate(
+        @Path("rid") _id: String
     ):Call<String>
 
     companion object {
@@ -53,8 +55,8 @@ interface ReportService {
             return ApiClient.create(ReportService::class.java).getMyReport(id)
         }
 
-        fun retrofitGetReportDetail(): Call<MyReportResponse>{
-            return ApiClient.create(ReportService::class.java).getReportDetail()
+        fun retrofitGetReportDetail(rid: String): Call<MyReportResponse>{
+            return ApiClient.create(ReportService::class.java).getReportDetail(rid)
         }
 
         fun retrofitGetManagerReport(): Call<List<ManagerReportResponse>> {

@@ -1,7 +1,7 @@
 package com.example.roadkill
 
 data class History(
-    val _id: String,
+    val rid: String,
     val date: String,
     val name: String,
 )

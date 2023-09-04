@@ -21,15 +21,15 @@ class UserMyReportDetailActivity: AppCompatActivity() {
         binding = ActivityUserMyReportDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val _id = intent.getStringExtra("_id")
-        if (_id != null) {
-            postMyReportDetailFun(_id)
+        val rid = intent.getStringExtra("rid")
+        if (rid != null) {
+            getMyReportDetailFun(rid)
         }
     }
 
-    private fun postMyReportDetailFun(_id: String) {
+    private fun getMyReportDetailFun(rid: String) {
 
-        ReportService.retrofitGetReportDetail()
+        ReportService.retrofitGetReportDetail(rid)
             .enqueue(object : Callback<MyReportResponse> { // 응답 타입을 String으로 지정
                 override fun onResponse(
                     call: Call<MyReportResponse>,

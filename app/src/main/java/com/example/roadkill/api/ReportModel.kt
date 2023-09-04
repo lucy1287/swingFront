@@ -27,7 +27,7 @@ import retrofit2.http.Part
 //)
 
 data class MyReportResponse(
-    @SerializedName("_id") val _id: String,
+    @SerializedName("_id") val rid: String,
     @SerializedName("img") val img: String,
     @SerializedName("lat") val lat: Double,
     @SerializedName("lng") val lng: Double,
@@ -39,7 +39,7 @@ data class MyReportResponse(
 )
 
 data class ManagerReportResponse(
-    @SerializedName("_id") val _id: String,
+    @SerializedName("_id") val rid: String,
     @SerializedName("img") val img: String,
     @SerializedName("lat") val lat: Double,
     @SerializedName("lng") val lng: Double,

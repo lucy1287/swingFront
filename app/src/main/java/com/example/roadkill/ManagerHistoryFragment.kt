@@ -32,9 +32,9 @@ class ManagerHistoryFragment : Fragment() {
         managerHistoryRVAdapter = ManagerHistoryRVAdapter(accidentHistoryList)
         managerHistoryRVAdapter.setOnItemClickListener(object : ManagerHistoryRVAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int) {
-                val _id = accidentHistoryList[pos]._id
+                val rid = accidentHistoryList[pos].rid
                 val intent = Intent(activity, ManagerReceiptDetailActivity::class.java)
-                intent.putExtra("_id", _id)
+                intent.putExtra("rid", rid)
                 startActivity(intent)
             }
         })
@@ -73,7 +73,7 @@ class ManagerHistoryFragment : Fragment() {
                                 //   .skipMemoryCache(true) // 메모리 캐시 사용하지 않음 (선택 사항)
                                 //    .into(binding.imageView) // 이미지를 표시할 ImageView
 
-                                val _id = report._id
+                                val rid = report.rid
                                 val lat = report.lat
                                 val lng = report.lng
                                 val species = report.species
@@ -82,7 +82,7 @@ class ManagerHistoryFragment : Fragment() {
                                 val status = report.status
                                 val accidentTime = report.accidentTime
                                 // 여기에서 데이터를 사용하세요.
-                                accidentHistoryList.add(History(_id, accidentTime, species))
+                                accidentHistoryList.add(History(rid, accidentTime, species))
                                 Log.d("accidentHistoryList", accidentHistoryList.toString())
                                 managerHistoryRVAdapter.notifyDataSetChanged();
                             }

@@ -36,9 +36,9 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         //RequestPermissionsUtil(this).requestLocation()
 
-        val _id = intent.getStringExtra("_id")
-        if (_id != null) {
-            postManagerDetailFun(_id)
+        val rid = intent.getStringExtra("rid")
+        if (rid != null) {
+            getManagerDetailFun(rid)
         }
 
         //처리하기 버튼
@@ -66,9 +66,9 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
     }
 
 
-    private fun postManagerDetailFun(_id: String) {
+    private fun getManagerDetailFun(rid: String) {
 
-        ReportService.retrofitGetReportDetail()
+        ReportService.retrofitGetReportDetail(rid)
             .enqueue(object : Callback<MyReportResponse> { // 응답 타입을 String으로 지정
                 override fun onResponse(
                     call: Call<MyReportResponse>,
