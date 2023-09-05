@@ -8,7 +8,11 @@
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/drawable/skyblue_round_background.xml" value="0.1405" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/drawable/stroke_round_background.xml" value="0.1405" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/drawable/stroke_round_background_large.xml" value="0.1605" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_animal_center.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_animal_status.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_call911.xml" value="0.2" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_camera.xml" value="0.152" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_injured.xml" value="0.1" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_location_permission.xml" value="0.10260416666666666" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -22,6 +26,9 @@
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_manager_roadkill_receipt_detail.xml" value="0.16458333333333333" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_map.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_map_detail.xml" value="0.25729166666666664" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_neamiss_animal_size.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_nearmiss_time.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_nearmiss_time_detail.xml" value="0.19674185463659147" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_sign_up.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_signin.xml" value="0.1671875" />
@@ -40,6 +47,8 @@
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/item_manager_history.xml" value="0.264" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/item_user_image.xml" value="0.11197916666666667" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/simple_list_item_1.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/menu/manager_menu.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/xml/network_security_config.xml" value="0.13020833333333334" />
       </map>
     </option>

@@ -47,8 +47,14 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
         binding.tvBtnOk.setOnClickListener{
                 postManagerUpdate(rid)
                 Toast.makeText(applicationContext, "처리가 완료되었습니다", Toast.LENGTH_SHORT).show()
-                val intent = Intent(applicationContext, UserMainActivity::class.java)
-                startActivity(intent)
+                if(MyApplication.prefs.getString("memberType", "false") == "true") {
+                    val intent = Intent(applicationContext, ManagerMainActivity::class.java)
+                    startActivity(intent)
+                }
+                else{
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                }
         }
 
 //        receiptImageRVAdapter = ReceiptImageRVAdapter(receiptImageList, this)
@@ -105,7 +111,7 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
     }
 
     private fun postManagerUpdate(rid: String) {
-        var managerUpdateJson = ManagerUpdateRequest("some species", "no", "", true)
+        var managerUpdateJson = ManagerUpdateRequest("고라니", "no", "", true)
 
         ReportService.retrofitPostManagerUpdate(managerUpdateJson, rid)
             .enqueue(object : Callback<String> { // 응답 타입을 String으로 지정

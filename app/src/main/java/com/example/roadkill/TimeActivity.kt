@@ -15,6 +15,11 @@ class TimeActivity: AppCompatActivity() {
         setContentView(view)
 
         binding.tvBtn1.setOnClickListener{
+            val intent = Intent(applicationContext, MapActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvBtn2.setOnClickListener{
             val intent = Intent(applicationContext, TimeDetailActivity::class.java)
             startActivity(intent)
         }

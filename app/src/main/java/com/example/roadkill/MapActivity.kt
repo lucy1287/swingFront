@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roadkill.databinding.ActivityMapBinding
 import com.google.android.gms.location.LocationServices
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import kotlin.math.pow
@@ -34,11 +35,23 @@ class MapActivity : AppCompatActivity() {
          mapView.setMapCenterPoint(mapPoint, true)
          mapView.setZoomLevel(3, true) // 초기 줌 레벨 설정
          mapView.invalidate()
+         setMarker(mapPoint)
+
 
         binding.tvBtn1.setOnClickListener{
             binding.root.removeAllViews()
-            val intent = Intent(applicationContext, UserReportActivity::class.java)
-            startActivity(intent)
+            if(MyApplication.prefs.getString("selection", "") == "big"){
+                val intent = Intent(applicationContext, InjuredActivity::class.java)
+                startActivity(intent)
+            }
+            else if(MyApplication.prefs.getString("selection", "") == "small"){
+                val intent = Intent(applicationContext, AnimalStatusActivity::class.java)
+                startActivity(intent)
+            }
+            else if(MyApplication.prefs.getString("selection", "") == "nearmiss"){
+                val intent = Intent(applicationContext, NearmissAnimalSizeActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         binding.tvBtn2.setOnClickListener{
@@ -77,6 +90,17 @@ class MapActivity : AppCompatActivity() {
             .addOnFailureListener { fail ->
                 Log.d("getLocation",fail.localizedMessage)
             }
+    }
+
+    private fun setMarker(mapPoint: MapPoint){
+        val marker = MapPOIItem()
+        marker.itemName = "마커" // 마커 이름
+        marker.tag = markerTag// 마커 고유 태그 (원하는 값으로 설정)
+        marker.mapPoint = mapPoint // 중심 좌표에 마커 추가
+        marker.markerType = MapPOIItem.MarkerType.RedPin // 마커 아이콘 타입
+        marker.selectedMarkerType = MapPOIItem.MarkerType.BluePin // 마커 선택 시 아이콘 타입
+        mapView.addPOIItem(marker)
+        markerTag++
     }
 
     override fun onResume() {

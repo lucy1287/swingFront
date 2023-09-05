@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_nearmiss_report"
+        android:id="@+id/cl_call_911"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent "
@@ -18,121 +18,131 @@
         android:layout_marginHorizontal="20dp">
 
         <ImageView
-            android:id="@+id/iv_nearmiss_report"
+            android:id="@+id/iv_call_911"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="20dp"
-            android:src="@drawable/roadkill_receipt"
+            android:src="@drawable/phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/tv_nearmiss_report"
+            android:id="@+id/tv_call_911"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="사고 위험"
+            android:text="119에 전화합시다"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_nearmiss_report"
-            app:layout_constraintTop_toTopOf="@id/iv_nearmiss_report" />
+            app:layout_constraintStart_toEndOf="@id/iv_call_911"
+            app:layout_constraintTop_toTopOf="@id/iv_call_911" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            android:text="로드킬 사고 발생할 뻔 했을 때"
-            app:layout_constraintStart_toEndOf="@id/iv_nearmiss_report"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nearmiss_report"
+            android:text="클릭 시 전화걸기 화면으로 이동합니다"
+            app:layout_constraintStart_toEndOf="@id/iv_call_911"
+            app:layout_constraintTop_toBottomOf="@+id/tv_call_911"
             app:layout_constraintBottom_toBottomOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_small_animal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_nearmiss_report"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="50dp">
-
-        <ImageView
-            android:id="@+id/iv_small_animal"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/eco_corridor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/tv_small_animal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:text="작은 동물 사고"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_small_animal"
-            app:layout_constraintTop_toTopOf="@id/iv_small_animal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="여우, 고양이 등"
-            app:layout_constraintStart_toEndOf="@id/iv_small_animal"
-            app:layout_constraintTop_toBottomOf="@+id/tv_small_animal"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_big_animal"
+        android:id="@+id/cl_warning_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_small_animal"
+        app:layout_constraintTop_toBottomOf="@+id/cl_call_911"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="50dp">
 
         <ImageView
-            android:id="@+id/iv_big_animal"
+            android:id="@+id/iv_warning_sign"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="20dp"
-            android:src="@drawable/eco_corridor"
+            android:src="@drawable/warning_sign"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/tv_big_animal"
+            android:id="@+id/tv_warning_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="큰 동물 사고"
+            android:text="차의 비상등을 켜주세요"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_big_animal"
-            app:layout_constraintTop_toTopOf="@id/iv_big_animal" />
+            app:layout_constraintStart_toEndOf="@id/iv_warning_sign"
+            app:layout_constraintTop_toTopOf="@id/iv_warning_sign" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            android:text="고라니, 사슴, 멧돼지 등"
-            app:layout_constraintStart_toEndOf="@id/iv_big_animal"
-            app:layout_constraintTop_toBottomOf="@+id/tv_big_animal"
+            android:text="클릭 시 자세한 방법을 안내드립니다"
+            app:layout_constraintStart_toEndOf="@id/iv_warning_sign"
+            app:layout_constraintTop_toBottomOf="@+id/tv_warning_sign"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_inside_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_warning_sign"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/iv_inside_car"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/car"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_inside_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="차 안으로 들어가 대기합시다"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_inside_car"
+            app:layout_constraintTop_toTopOf="@id/iv_inside_car" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_btn_1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="완료"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/skyblue_round_background"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

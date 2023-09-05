@@ -27,7 +27,7 @@
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="사고가 일어날 뻔한 건 언제인가요?"
+        android:text="사고가 일어난 건 언제인가요?"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/iv_icon"

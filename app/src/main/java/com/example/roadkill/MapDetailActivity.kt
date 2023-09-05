@@ -6,12 +6,14 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roadkill.databinding.ActivityMapDetailBinding
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import org.json.JSONObject
@@ -37,13 +39,14 @@ class MapDetailActivity : AppCompatActivity() {
 
         mapView = binding.mapViewDetail
         mapView.setDaumMapApiKey("baafde3b7e2b0ca2301e515aac5d1492")
+        mapView.setClickable(true)
 
-        // getLocation()
+        getLocation()
 
-//        val mapPoint = MapPoint.mapPointWithGeoCoord(nowLatitude, nowLongitude)
-//        mapView.setMapCenterPoint(mapPoint, true)
-//        mapView.setZoomLevel(3, true) // 초기 줌 레벨 설정
-//        mapView.invalidate()
+        val mapPoint = MapPoint.mapPointWithGeoCoord(nowLatitude, nowLongitude)
+        mapView.setMapCenterPoint(mapPoint, true)
+        mapView.setZoomLevel(3, true) // 초기 줌 레벨 설정
+        mapView.invalidate()
 
         binding.ivMapSearch.setOnClickListener {
             var mapSearchInput = binding.etMapSearch.text.toString()
@@ -52,9 +55,48 @@ class MapDetailActivity : AppCompatActivity() {
             binding.etMapSearch.clearFocus()
         }
 
+        mapView.setMapViewEventListener(object : MapView.MapViewEventListener {
+            override fun onMapViewInitialized(mapView: MapView) {
+                // 맵뷰 초기화 이벤트
+            }
+
+            override fun onMapViewCenterPointMoved(mapView: MapView, mapPoint: MapPoint) {
+                // 맵뷰 중심 좌표 이동 이벤트
+            }
+
+            override fun onMapViewZoomLevelChanged(mapView: MapView, zoomLevel: Int) {
+                // 맵뷰 줌 레벨 변경 이벤트
+            }
+
+            override fun onMapViewSingleTapped(mapView: MapView, mapPoint: MapPoint) {
+                Log.d("싱글탭", "싱글탭")
+            }
+
+            override fun onMapViewDoubleTapped(mapView: MapView, mapPoint: MapPoint) {
+                Log.d("더블탭", "더블탭")
+            }
+            override fun onMapViewLongPressed(mapView: MapView, mapPoint: MapPoint) {
+                Log.d("롱클릭", "롱클릭")
+                showAddMarkerDialog(mapView, mapPoint)
+            }
+            override fun onMapViewDragStarted(mapView: MapView, mapPoint: MapPoint) {}
+            override fun onMapViewDragEnded(mapView: MapView, mapPoint: MapPoint) {}
+            override fun onMapViewMoveFinished(mapView: MapView, mapPoint: MapPoint) {}
+        })
+
         binding.tvBtn2.setOnClickListener{
-            val intent = Intent(applicationContext, CameraActivity::class.java)
-            startActivity(intent)
+            if(MyApplication.prefs.getString("selection", "") == "big"){
+                val intent = Intent(applicationContext, InjuredActivity::class.java)
+                startActivity(intent)
+            }
+            else if(MyApplication.prefs.getString("selection", "") == "small"){
+                val intent = Intent(applicationContext, AnimalStatusActivity::class.java)
+                startActivity(intent)
+            }
+            else if(MyApplication.prefs.getString("selection", "") == "nearmiss"){
+                val intent = Intent(applicationContext, NearmissAnimalSizeActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -124,6 +166,16 @@ class MapDetailActivity : AppCompatActivity() {
         } else {
             throw Exception("HTTP GET request failed with response code: $responseCode")
         }
+    }
+
+    private fun showAddMarkerDialog(mapView: MapView, mapPoint: MapPoint) {
+        Log.d("롱클릭", "롱클릭")
+        val marker = MapPOIItem()
+        marker.itemName = "마커" // 마커 이름
+        marker.mapPoint = mapPoint // 마커 위치 설정
+        marker.markerType = MapPOIItem.MarkerType.RedPin // 마커 아이콘 타입
+        marker.selectedMarkerType = MapPOIItem.MarkerType.BluePin // 마커 선택 시 아이콘 타입
+        mapView.addPOIItem(marker)
     }
 
     fun Double.roundTo(decimals: Int): Double {

@@ -1,5 +1,6 @@
 package com.example.roadkill
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,11 @@ class UserMyReportDetailActivity: AppCompatActivity() {
         val rid = intent.getStringExtra("rid")
         if (rid != null) {
             getMyReportDetailFun(rid)
+        }
+
+        binding.tvBtnOk.setOnClickListener {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

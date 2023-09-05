@@ -73,7 +73,7 @@ class UserReportActivity : AppCompatActivity() {
         binding.tvBtnOk.setOnClickListener{
                 postReportFun()
                 Toast.makeText(applicationContext, "요청이 접수되었습니다", Toast.LENGTH_SHORT).show()
-                val intent = Intent(applicationContext, MainActivity::class.java)
+                val intent = Intent(applicationContext, Call911Activity::class.java)
                 startActivity(intent)
         }
 
@@ -187,9 +187,9 @@ class UserReportActivity : AppCompatActivity() {
 
         val call = apiService.postReport(
             img = imagePart,
-            lat = 123.456,
-            lng = 789.012,
-            species = "some_species",
+            lat = lat,
+            lng = lng,
+            species = "고라니",
             cause = "some_cause",
             otherInfo = "additional_info",
             status = false,

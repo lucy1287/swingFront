@@ -8,11 +8,13 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.roadkill.databinding.ActivityMainBinding
-import com.example.roadkill.databinding.ActivityUserMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,22 +32,20 @@ class MainActivity : AppCompatActivity() {
         requestPermission()
 
         binding.clNearmissReport.setOnClickListener{
-            val intent = Intent(applicationContext, UserNearmissReportActivity::class.java)
+            MyApplication.prefs.setString("selection", "nearmiss")
+            val intent = Intent(applicationContext, NearmissTimeActivity::class.java)
             startActivity(intent)
         }
 
         binding.clSmallAnimal.setOnClickListener{
+            MyApplication.prefs.setString("selection", "small")
             val intent = Intent(applicationContext, TimeActivity::class.java)
             startActivity(intent)
         }
 
         binding.clBigAnimal.setOnClickListener{
+            MyApplication.prefs.setString("selection", "big")
             val intent = Intent(applicationContext, TimeActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.ivMenu.setOnClickListener {
-            val intent = Intent(applicationContext, UserMyReportActivity::class.java)
             startActivity(intent)
         }
 
@@ -112,5 +112,28 @@ class MainActivity : AppCompatActivity() {
         builder.setNegativeButton("아니오", null)
 
         builder.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.menu_item1 -> {
+                MyApplication.prefs.setString("id", "no id")
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.menu_item2 -> {
+                val intent = Intent(applicationContext, UserMyReportActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

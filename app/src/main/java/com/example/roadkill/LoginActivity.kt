@@ -28,11 +28,13 @@ class LoginActivity : AppCompatActivity() {
 
             if(id == "10000" && password == "1234") {
                 Toast.makeText(this, "사용자로 로그인 되었습니다", Toast.LENGTH_SHORT).show()
+                MyApplication.prefs.setString("memberType", "false")
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
             }
             if(id == "20000" && password == "1234") {
                 Toast.makeText(this, "관리자로 로그인 되었습니다", Toast.LENGTH_SHORT).show()
+                MyApplication.prefs.setString("memberType", "true")
                 val intent = Intent(applicationContext, ManagerMainActivity::class.java)
                 startActivity(intent)
             }
@@ -70,9 +72,9 @@ class LoginActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val responseData = response.body()
                         println("로그인 성공: $responseData")
-                        Log.d("id1", responseData.toString().trim('"'))
+                        Toast.makeText(applicationContext, "사용자로 로그인 되었습니다", Toast.LENGTH_SHORT).show()
                         MyApplication.prefs.setString("id", responseData.toString().trim('"'))
-                        Log.d("id2", MyApplication.prefs.getString("id", "no id"))
+                        MyApplication.prefs.setString("memberType", "false")
                     } else {
                         val errorBody = response.errorBody()?.string()
                         println("로그인 실패: $errorBody")

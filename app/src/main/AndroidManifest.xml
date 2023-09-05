@@ -109,6 +109,27 @@
             android:name=".UserMyReportDetailActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".Call911Activity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".AnimalStatusActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".AnimalCenterActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".InjuredActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".NearmissAnimalSizeActivity"
+            android:exported="false">
+        </activity>
+
 
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="670c7b51689dfd6ee61c44079bc0b128"/>

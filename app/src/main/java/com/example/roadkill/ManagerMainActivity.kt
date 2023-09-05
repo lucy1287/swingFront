@@ -8,6 +8,9 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -102,5 +105,23 @@ class ManagerMainActivity : AppCompatActivity() {
         builder.setNegativeButton("아니오", null)
 
         builder.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.manager_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.menu_item1 -> {
+                MyApplication.prefs.setString("id", "no id")
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
