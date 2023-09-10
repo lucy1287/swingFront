@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.roadkill.api.ReportService
 import com.example.roadkill.databinding.ActivityUserReportBinding
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -33,6 +34,7 @@ class UserReportActivity : AppCompatActivity() {
     lateinit var reportImageRVAdapter: ReportImageRVAdapter
     private var lat: Double = 0.0
     private var lng: Double = 0.0
+   // private lateinit var species: String
 
 
     override fun onStart() {
@@ -70,11 +72,31 @@ class UserReportActivity : AppCompatActivity() {
 
 
         //요청하기 버튼
-        binding.tvBtnOk.setOnClickListener{
-                postReportFun()
-                Toast.makeText(applicationContext, "요청이 접수되었습니다", Toast.LENGTH_SHORT).show()
-                val intent = Intent(applicationContext, Call911Activity::class.java)
-                startActivity(intent)
+        binding.tvBtnOk.setOnClickListener {
+//            var species: String
+//            GlobalScope.launch(Dispatchers.Main) {
+//                species = withContext(Dispatchers.IO) {
+//                    postImageClassificationFun()
+//                }
+//
+//                if(species == "raccoon")
+//                    species = "너구리"
+//                else if(species == "roe deer")
+//                    species = "노루"
+//                else if(species == "water deer")
+//                    species = "고라니"
+//                else if(species == "wild boar")
+//                    species = "멧돼지"
+//
+//                postReportFun(species)
+//                Log.d("이미지분류", species)
+//
+//                val intent = Intent(applicationContext, Call911Activity::class.java)
+//                startActivity(intent)
+//            }
+            postReportFun()
+            val intent = Intent(applicationContext, Call911Activity::class.java)
+            startActivity(intent)
         }
 
         reportImageRVAdapter = ReportImageRVAdapter(reportImageList, this)
@@ -189,7 +211,7 @@ class UserReportActivity : AppCompatActivity() {
             img = imagePart,
             lat = lat,
             lng = lng,
-            species = "고라니",
+            species = "동물종 분석 중입니다",
             cause = "some_cause",
             otherInfo = "additional_info",
             status = false,
@@ -211,6 +233,42 @@ class UserReportActivity : AppCompatActivity() {
             }
         })
     }
+
+//    suspend fun postImageClassificationFun(): String {
+//        val img: Uri = reportImageList[0]!!
+//        var responseData: String = ""
+//        val apiService = ApiClient.create(ImageService::class.java)
+//
+//// 네트워크 요청 및 응답 처리
+//        val filePath = getRealPathFromUri(this, img)
+//        Log.d("파일경로", filePath.toString())
+//        val file = File(filePath)
+//        val requestFile = file.asRequestBody("image/*".toMediaType())
+//        val imagePart = MultipartBody.Part.createFormData("img", file.name, requestFile)
+//
+//        val call = apiService.postImage(
+//            img = imagePart,
+//        )
+//        return withContext(Dispatchers.IO) {
+//            call.enqueue(object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    if (response.isSuccessful) {
+//                        responseData = response.body().toString()
+//                        println("이미지 분류 성공: $responseData")
+//                    } else {
+//                        val errorBody = response.errorBody()?.string()
+//                        println("이미지 분류 실패: $errorBody")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.e("TAG", "실패원인: $t")
+//                }
+//            })
+//            delay(10000)
+//            return@withContext responseData
+//        }
+//    }
 
     fun getRealPathFromUri(context: Context, uri: Uri): String? {
         var filePath: String? = null
