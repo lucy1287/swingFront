@@ -17,7 +17,7 @@ class NearmissTimeDetailActivity:AppCompatActivity() {
         setContentView(view)
 
         binding.tvBtn2.setOnClickListener{
-            val intent = Intent(applicationContext, MapActivity::class.java)
+            val intent = Intent(applicationContext, NaverMapActivity::class.java)
             startActivity(intent)
         }
     }

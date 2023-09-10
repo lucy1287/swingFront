@@ -15,7 +15,7 @@ class TimeActivity: AppCompatActivity() {
         setContentView(view)
 
         binding.tvBtn1.setOnClickListener{
-            val intent = Intent(applicationContext, MapActivity::class.java)
+            val intent = Intent(applicationContext, NaverMapActivity::class.java)
             startActivity(intent)
         }
 

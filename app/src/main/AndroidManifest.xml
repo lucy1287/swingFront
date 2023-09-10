@@ -74,14 +74,6 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".MapActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".MapDetailActivity"
-            android:exported="false">
-        </activity>
-        <activity
             android:name=".CameraActivity"
             android:exported="false">
         </activity>
@@ -129,9 +121,17 @@
             android:name=".NearmissAnimalSizeActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".NaverMapActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".NaverMapDetailActivity"
+            android:exported="false">
+        </activity>
 
-
-
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID" android:value="u68naoxsj2" />
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="670c7b51689dfd6ee61c44079bc0b128"/>
     </application>
 
