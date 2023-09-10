@@ -1,24 +1,31 @@
 package com.example.roadkill
 
+import android.Manifest.permission.CAMERA
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.roadkill.api.ReportService
 import com.example.roadkill.databinding.ActivityUserReportBinding
 import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -27,6 +34,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserReportActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserReportBinding
@@ -35,6 +44,19 @@ class UserReportActivity : AppCompatActivity() {
     private var lat: Double = 0.0
     private var lng: Double = 0.0
    // private lateinit var species: String
+
+    lateinit var filePath: String
+    private lateinit var resultLauncher : ActivityResultLauncher<Intent>
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 123 // 원하는 요청 코드
+    }
+    private lateinit var photoURI: Uri
+
+    // 이전 액티비티에서 카메라를 선택할 때
+    private val REQUEST_CAMERA = 1
+
+    // 이전 액티비티에서 갤러리를 선택할 때
+    private val REQUEST_GALLERY = 2
 
 
     override fun onStart() {
@@ -63,37 +85,17 @@ class UserReportActivity : AppCompatActivity() {
             getTime(tvAccidentDateInfo)
         }
 
-        //사진
-            //갤러리에서 이미지 가져오기
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(intent, 1)
+        if(intent.getStringExtra("imageMethod") == "camera"){
+            getImageFromCamera()
+        }
+
+        else if(intent.getStringExtra("imageMethod") == "gallery") {
+            getImageFromGallery()
+        }
 
 
         //요청하기 버튼
         binding.tvBtnOk.setOnClickListener {
-//            var species: String
-//            GlobalScope.launch(Dispatchers.Main) {
-//                species = withContext(Dispatchers.IO) {
-//                    postImageClassificationFun()
-//                }
-//
-//                if(species == "raccoon")
-//                    species = "너구리"
-//                else if(species == "roe deer")
-//                    species = "노루"
-//                else if(species == "water deer")
-//                    species = "고라니"
-//                else if(species == "wild boar")
-//                    species = "멧돼지"
-//
-//                postReportFun(species)
-//                Log.d("이미지분류", species)
-//
-//                val intent = Intent(applicationContext, Call911Activity::class.java)
-//                startActivity(intent)
-//            }
             postReportFun()
             val intent = Intent(applicationContext, Call911Activity::class.java)
             startActivity(intent)
@@ -141,11 +143,95 @@ class UserReportActivity : AppCompatActivity() {
         textView.text = dataFormat5.format(currentTime)
     }
 
+    private fun getImageFromCamera(){
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                Log.d("INFO", "RESULT_OK")
+                val option = BitmapFactory.Options()
+                option.inSampleSize = 10
+                val bitmap = BitmapFactory.decodeFile(filePath, option)
+                bitmap.let{
+                    // binding.galleryResult.setImageBitmap(bitmap)
+                }
+                Log.d("photoUri", photoURI.toString())
+            }
+            else
+                Log.d("INFO", "불러오기 실패")
+        }
+
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        val file = File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        )
+
+        filePath = file.absolutePath
+        photoURI = createImageFile()
+
+        if (ContextCompat.checkSelfPermission(this, CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // 권한이 없을 경우 권한 요청
+            ActivityCompat.requestPermissions(this, arrayOf(CAMERA), REQUEST_CAMERA_PERMISSION)
+        } else {
+            //  권한이 이미 부여되었을 경우 카메라 앱 호출 등 필요한 작업 수행
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+            // resultLauncher.launch(cameraIntent)
+            startActivityForResult(cameraIntent, REQUEST_CAMERA)
+        }
+    }
+
+    // 권한 요청 결과 처리
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 권한이 부여된 경우 필요한 작업 수행
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                resultLauncher.launch(intent)
+            } else {
+                // 권한이 거부된 경우 사용자에게 알림 표시 또는 다른 대체 작업 수행
+            }
+        }
+    }
+
+    private fun createImageFile(): Uri {
+        val now = SimpleDateFormat("yyMMdd_HHmmss").format(Date())
+        val content = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "img_$now.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+        }
+        return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)!!
+    }
+
+    private fun getImageFromGallery(){
+        //갤러리에서 이미지 가져오기
+        val galleryIntent = Intent(Intent.ACTION_PICK)
+        galleryIntent.type = "image/*"
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(galleryIntent, REQUEST_GALLERY)
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-            1 -> {
+            REQUEST_CAMERA ->{
+                var imageUri : Uri? = photoURI
+                reportImageList.add(imageUri);
+
+                reportImageRVAdapter = ReportImageRVAdapter(reportImageList, this);
+                binding.rvAccidentImage.adapter = reportImageRVAdapter
+                val reportImageLinearLayoutManager = LinearLayoutManager(this)
+                reportImageLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+                binding.rvAccidentImage.layoutManager = reportImageLinearLayoutManager
+            }
+            REQUEST_GALLERY -> {
                 if (resultCode == RESULT_OK) {
                     if(data == null){   // 어떤 이미지도 선택하지 않은 경우
                         Toast.makeText(this, "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
@@ -234,42 +320,6 @@ class UserReportActivity : AppCompatActivity() {
         })
     }
 
-//    suspend fun postImageClassificationFun(): String {
-//        val img: Uri = reportImageList[0]!!
-//        var responseData: String = ""
-//        val apiService = ApiClient.create(ImageService::class.java)
-//
-//// 네트워크 요청 및 응답 처리
-//        val filePath = getRealPathFromUri(this, img)
-//        Log.d("파일경로", filePath.toString())
-//        val file = File(filePath)
-//        val requestFile = file.asRequestBody("image/*".toMediaType())
-//        val imagePart = MultipartBody.Part.createFormData("img", file.name, requestFile)
-//
-//        val call = apiService.postImage(
-//            img = imagePart,
-//        )
-//        return withContext(Dispatchers.IO) {
-//            call.enqueue(object : Callback<String> {
-//                override fun onResponse(call: Call<String>, response: Response<String>) {
-//                    if (response.isSuccessful) {
-//                        responseData = response.body().toString()
-//                        println("이미지 분류 성공: $responseData")
-//                    } else {
-//                        val errorBody = response.errorBody()?.string()
-//                        println("이미지 분류 실패: $errorBody")
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<String>, t: Throwable) {
-//                    Log.e("TAG", "실패원인: $t")
-//                }
-//            })
-//            delay(10000)
-//            return@withContext responseData
-//        }
-//    }
-
     fun getRealPathFromUri(context: Context, uri: Uri): String? {
         var filePath: String? = null
         val projection = arrayOf(MediaStore.Images.Media.DATA)
@@ -281,5 +331,4 @@ class UserReportActivity : AppCompatActivity() {
         }
         return filePath
     }
-
 }

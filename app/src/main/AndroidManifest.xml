@@ -4,6 +4,8 @@
     package="com.example.roadkill">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -133,6 +135,9 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID" android:value="u68naoxsj2" />
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="670c7b51689dfd6ee61c44079bc0b128"/>
+
     </application>
+
+
 
 </manifest>

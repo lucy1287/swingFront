@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roadkill.databinding.ActivityCameraBinding
-import com.example.roadkill.databinding.ActivitySignUpBinding
 
 class CameraActivity:AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
