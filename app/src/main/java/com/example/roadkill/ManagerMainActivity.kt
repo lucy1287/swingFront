@@ -38,7 +38,7 @@ class ManagerMainActivity : AppCompatActivity() {
         }
 
         binding.clEcoCorridor.setOnClickListener{
-            val intent = Intent(applicationContext, UserMapActivity::class.java)
+            val intent = Intent(applicationContext, UserRoadkillMapActivity::class.java)
             startActivity(intent)
         }
 

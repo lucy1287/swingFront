@@ -1,5 +1,6 @@
 package com.example.roadkill
 
+import android.Manifest
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
@@ -9,13 +10,18 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.roadkill.databinding.ActivityUserMainBinding
 
 class UserMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserMainBinding
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 123 // 원하는 요청 코드
+    }
 
     override fun onStart() {
         super.onStart()
@@ -77,6 +83,13 @@ class UserMainActivity : AppCompatActivity() {
                     ), 1)
             }
         }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // 권한이 없을 경우 권한 요청
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Companion.REQUEST_CAMERA_PERMISSION)
+        } else {
+           return
+        }
     }
 
     private fun hasLocationPermissions(): Boolean {
@@ -103,4 +116,5 @@ class UserMainActivity : AppCompatActivity() {
 
         builder.show()
     }
+
 }

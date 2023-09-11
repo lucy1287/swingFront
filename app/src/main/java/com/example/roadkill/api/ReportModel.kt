@@ -33,7 +33,7 @@ data class MyReportResponse(
     @SerializedName("lng") val lng: Double,
     @SerializedName("species") val species: String,
     @SerializedName("cause") val cause: String,
-    @SerializedName("otherInfo") val otherInfo: String,
+    @SerializedName("otherInfoByUser") val otherInfoByUser: String,
     @SerializedName("status") val status: Boolean,
     @SerializedName("accidentTime") val accidentTime: String
 )
@@ -45,7 +45,7 @@ data class ManagerReportResponse(
     @SerializedName("lng") val lng: Double,
     @SerializedName("species") val species: String,
     @SerializedName("cause") val cause: String,
-    @SerializedName("otherInfo") val otherInfo: String,
+    @SerializedName("otherInfoByUser") val otherInfoByUser: String,
     @SerializedName("status") val status: Boolean,
     @SerializedName("accidentTime") val accidentTime: String
 )

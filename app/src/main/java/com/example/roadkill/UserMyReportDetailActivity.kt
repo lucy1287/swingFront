@@ -47,6 +47,8 @@ class UserMyReportDetailActivity: AppCompatActivity() {
                         if (responseData != null) {
                             binding.tvAccidentDateInfo.text = responseData.accidentTime
                             binding.tvAccidentLocationInfo.text = "(" + responseData.lat + " , " + responseData.lng + ")"
+                            binding.tvAccidentCauseInfo.text = responseData.cause
+                            binding.tvAccidentOtherInfo.text= responseData.otherInfoByUser
 
                             //이미지 표시
                             val imgPart = ApiClient.BASE_URL + responseData.img.replace("\\", "/")

@@ -15,12 +15,12 @@ class NearmissAnimalSizeActivity: AppCompatActivity() {
         binding = ActivityNearmissAnimalSizeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvBtn1.setOnClickListener{
+        binding.ivSmall.setOnClickListener{
             val intent = Intent(applicationContext, UserNearmissReportActivity::class.java)
             startActivity(intent)
         }
 
-        binding.tvBtn2.setOnClickListener{
+        binding.ivBig.setOnClickListener{
             val intent = Intent(applicationContext, UserNearmissReportActivity::class.java)
             startActivity(intent)
         }

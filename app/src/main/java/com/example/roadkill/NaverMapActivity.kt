@@ -21,16 +21,16 @@ import com.naver.maps.map.util.FusedLocationSource
 
 // OnMapReadyCallback을 상속 받는다.
 class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var binding: ActivityNaverMapBinding
+    private lateinit var naverMap: NaverMap
+    private lateinit var locationSource: FusedLocationSource
+
     private val LOCATION_PERMISSION_REQUEST_CODE = 5000
     private val marker = Marker()
 
     private val PERMISSIONS = arrayOf(
         ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
     )
-
-    private lateinit var binding: ActivityNaverMapBinding
-    private lateinit var naverMap: NaverMap
-    private lateinit var locationSource: FusedLocationSource
 
     // onCreate에서 권한을 확인하며 위치 권한이 없을 경우 사용자에게 권한을 요청한다.
     override fun onCreate(savedInstanceState: Bundle?) {

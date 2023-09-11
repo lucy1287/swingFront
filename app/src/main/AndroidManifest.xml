@@ -131,6 +131,10 @@
             android:name=".NaverMapDetailActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".UserRoadkillMapActivity"
+            android:exported="false">
+        </activity>
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID" android:value="u68naoxsj2" />

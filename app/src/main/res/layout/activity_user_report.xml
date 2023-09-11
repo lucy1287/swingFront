@@ -81,6 +81,40 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_accident_date"
             app:layout_constraintStart_toEndOf="@+id/tv_accident_date_info"/>
 
+        <TextView
+            android:id="@+id/tv_accident_cause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사고 원인"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_accident_date"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/et_accident_cause_info"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_accident_cause"
+            app:layout_constraintStart_toStartOf="@+id/tv_accident_date_info" />
+        <TextView
+            android:id="@+id/tv_accident_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추가 정보"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_accident_cause"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/et_accident_other_info"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_accident_other"
+            app:layout_constraintStart_toStartOf="@id/et_accident_cause_info" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,14 +165,14 @@
         android:text="요청하기"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
-        android:background="@drawable/skyblue_round_background"
+        android:background="@drawable/green_round_background"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

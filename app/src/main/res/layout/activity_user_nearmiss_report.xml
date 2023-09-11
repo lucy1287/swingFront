@@ -91,14 +91,14 @@
         android:text="요청하기"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
-        android:background="@drawable/skyblue_round_background"
+        android:background="@drawable/green_round_background"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

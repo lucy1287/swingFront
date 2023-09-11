@@ -31,21 +31,37 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         requestPermission()
 
-        binding.clNearmissReport.setOnClickListener{
+        binding.flNearmiss.setOnClickListener{
             MyApplication.prefs.setString("selection", "nearmiss")
             val intent = Intent(applicationContext, NearmissTimeActivity::class.java)
             startActivity(intent)
         }
 
-        binding.clSmallAnimal.setOnClickListener{
+        binding.flSmallAnimal.setOnClickListener{
             MyApplication.prefs.setString("selection", "small")
             val intent = Intent(applicationContext, TimeActivity::class.java)
             startActivity(intent)
         }
 
-        binding.clBigAnimal.setOnClickListener{
+        binding.flBigAnimal.setOnClickListener{
             MyApplication.prefs.setString("selection", "big")
             val intent = Intent(applicationContext, TimeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.flMap.setOnClickListener{
+            val intent = Intent(applicationContext, UserRoadkillMapActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvBtn1.setOnClickListener{
+            val intent = Intent(applicationContext, UserMyReportActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvBtn2.setOnClickListener{
+            MyApplication.prefs.setString("id", "no id")
+            val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
         }
 

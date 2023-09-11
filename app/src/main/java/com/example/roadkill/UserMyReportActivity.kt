@@ -71,7 +71,7 @@ class UserMyReportActivity: AppCompatActivity() {
                             val lng = report.lng
                             val species = report.species
                             val cause = report.cause
-                            val otherInfo = report.otherInfo
+                            val otherInfo = report.otherInfoByUser
                             val status = report.status
                             val accidentTime = report.accidentTime
                             // 여기에서 데이터를 사용하세요.

@@ -49,7 +49,7 @@
             android:text="지역 선택"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/skyblue_round_background"
+            android:background="@drawable/green_round_background"
             />
 
         <TextView
@@ -67,7 +67,7 @@
             android:text="건너뛰기"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/tv_btn_1"
@@ -75,7 +75,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="20dp"
-            android:background="@drawable/skyblue_round_background"
+            android:background="@drawable/green_round_background"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

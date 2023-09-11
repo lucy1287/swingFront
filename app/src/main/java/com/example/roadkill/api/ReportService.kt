@@ -20,8 +20,9 @@ interface ReportService {
         @Part("lng") lng: Double,
         @Part("species") species: String,
         @Part("cause") cause: String,
-        @Part("otherInfo") otherInfo: String,
+        @Part("otherInfoByUser") otherInfoByUser: String,
         @Part("status") status: Boolean,
+        @Part("accidentTime") accidentTime: String,
         @Path("id") id: String
     ): Call<String>
 

@@ -13,13 +13,13 @@ class CameraActivity:AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvBtn1.setOnClickListener{
+        binding.ivCamera.setOnClickListener{
             val intent = Intent(applicationContext, UserReportActivity::class.java)
             intent.putExtra("imageMethod", "camera")
             startActivity(intent)
         }
 
-        binding.tvBtn2.setOnClickListener{
+        binding.ivGallery.setOnClickListener{
             val intent = Intent(applicationContext, UserReportActivity::class.java)
             intent.putExtra("imageMethod", "gallery")
             startActivity(intent)

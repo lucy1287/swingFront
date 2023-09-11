@@ -54,7 +54,7 @@ class NaverMapDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.ivMapSearch.setOnClickListener {
             var mapSearchInput = binding.etMapSearch.text.toString()
             // var mapSearchInput="서울특별시 동작구"
-            main(mapSearchInput)
+            search(mapSearchInput)
             binding.etMapSearch.clearFocus()
         }
 
@@ -100,24 +100,17 @@ class NaverMapDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
-        // 현재 위치
         naverMap.locationSource = locationSource
-        // 현재 위치 버튼 기능
         naverMap.uiSettings.isLocationButtonEnabled = true
-        // 위치를 추적하면서 카메라도 따라 움직인다.
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow  //위치 추적하면서 카메라도 따라 이동
 
-        // 지도가 롱 클릭 되면 onMapLongClick() 콜백 메서드가 호출 되며, 파라미터로 클릭된 지점의 화면 좌표와 지도 좌표가 전달 된다.
-        naverMap.setOnMapLongClickListener { point, coord ->
+        naverMap.setOnMapLongClickListener { point, coord ->  // 지도 롱 클릭 시 마커 생성
             marker.position = LatLng(coord.latitude, coord.longitude)
             marker.map = naverMap
         }
     }
 
-
-
-    fun main(mapSearchInput: String) = runBlocking {
-        val keyword = "카카오판교오피스" // 검색할 키워드
+    fun search(mapSearchInput: String) = runBlocking {
         val addr: String = URLEncoder.encode(mapSearchInput, "UTF-8")
 
         // 카카오 REST API 키

@@ -13,92 +13,37 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp"/>
 
-    <ImageView
-        android:id="@+id/iv_icon_1"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/animal_big"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="100dp"/>
-
-    <ImageView
-        android:id="@+id/iv_icon_2"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/animal_middle"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_1"
-        app:layout_constraintStart_toEndOf="@+id/iv_icon_1"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"/>
-
-    <ImageView
-        android:id="@+id/iv_icon_3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/animal_small"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_2"
-        app:layout_constraintStart_toEndOf="@+id/iv_icon_2"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"/>
-
     <TextView
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="사고날 위험이 있었던 동물의 크기는 어떠셨나요??"
+        android:text="차에서 나와서 사고발생 현장 사진을 찍어주세요"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/iv_icon_1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginHorizontal="20dp" />
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="30dp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/iv_small"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/small"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <TextView
-            android:id="@+id/tv_btn_1"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="작다"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/skyblue_round_background"
-            />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="80dp"/>
 
-        <TextView
-            android:id="@+id/tv_btn_2"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="과거"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/tv_btn_1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="20dp"
-            android:background="@drawable/skyblue_round_background"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <ImageView
+        android:id="@+id/iv_big"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/big"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="80dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

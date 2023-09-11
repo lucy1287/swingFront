@@ -151,10 +151,6 @@ class UserReportActivity : AppCompatActivity() {
                 val option = BitmapFactory.Options()
                 option.inSampleSize = 10
                 val bitmap = BitmapFactory.decodeFile(filePath, option)
-                bitmap.let{
-                    // binding.galleryResult.setImageBitmap(bitmap)
-                }
-                Log.d("photoUri", photoURI.toString())
             }
             else
                 Log.d("INFO", "불러오기 실패")
@@ -162,13 +158,9 @@ class UserReportActivity : AppCompatActivity() {
 
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
         val file = File.createTempFile(
-            "JPEG_${timeStamp}_",
-            ".jpg",
-            storageDir
+            "JPEG_${timeStamp}_", ".jpg", storageDir
         )
-
         filePath = file.absolutePath
         photoURI = createImageFile()
 
@@ -286,21 +278,23 @@ class UserReportActivity : AppCompatActivity() {
 
         val apiService = ApiClient.create(ReportService::class.java)
 
-// 네트워크 요청 및 응답 처리
+        // 이미지 파일 생성
         val filePath = getRealPathFromUri(this, img)
         Log.d("파일경로", filePath.toString())
         val file = File(filePath)
         val requestFile = file.asRequestBody("image/*".toMediaType())
         val imagePart = MultipartBody.Part.createFormData("img", file.name, requestFile)
 
+        // 네트워크 요청 및 응답 처리
         val call = apiService.postReport(
             img = imagePart,
             lat = lat,
             lng = lng,
             species = "동물종 분석 중입니다",
-            cause = "some_cause",
-            otherInfo = "additional_info",
+            cause = binding.etAccidentCauseInfo.text.toString(),
+            otherInfoByUser = binding.etAccidentOtherInfo.text.toString(),
             status = false,
+            accidentTime = binding.tvAccidentDateInfo.text.toString(),
             MyApplication.prefs.getString("id", "no id")
         )
         call.enqueue(object : Callback<String> {
@@ -313,7 +307,6 @@ class UserReportActivity : AppCompatActivity() {
                     println("신고 실패: $errorBody")
                 }
             }
-
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.e("TAG", "실패원인: $t")
             }
