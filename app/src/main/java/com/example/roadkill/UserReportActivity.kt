@@ -14,6 +14,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -93,12 +96,21 @@ class UserReportActivity : AppCompatActivity() {
             getImageFromGallery()
         }
 
+        binding.tvAgain.setOnClickListener {
+            val intent = Intent(applicationContext, CameraActivity::class.java)
+            startActivity(intent)
+        }
 
         //요청하기 버튼
         binding.tvBtnOk.setOnClickListener {
-            postReportFun()
-            val intent = Intent(applicationContext, Call911Activity::class.java)
-            startActivity(intent)
+            if(reportImageList.size == 0)
+                Toast.makeText(this, "이미지를 선택해주세요", Toast.LENGTH_SHORT).show()
+            else {
+                postReportFun()
+                Toast.makeText(applicationContext, "요청이 접수되었습니다", Toast.LENGTH_SHORT).show()
+                val intent = Intent(applicationContext, Call911Activity::class.java)
+                startActivity(intent)
+            }
         }
 
         reportImageRVAdapter = ReportImageRVAdapter(reportImageList, this)
@@ -120,27 +132,33 @@ class UserReportActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun getLocation(textView: TextView) {
-        val fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this)
+//        val fusedLocationProviderClient =
+//            LocationServices.getFusedLocationProviderClient(this)
+//
+//        fusedLocationProviderClient.lastLocation
+//            .addOnSuccessListener { success: Location? ->
+//                success?.let { location ->
+//                    textView.text =
+//                        "${location.latitude}, ${location.longitude}"
+//                    lat = location.latitude
+//                    lng = location.longitude
+//                }
+//            }
+//            .addOnFailureListener { fail ->
+//                textView.text = fail.localizedMessage
+//            }
+        lat = MyApplication.prefs.getString("lat","").toDouble()
+        lng = MyApplication.prefs.getString("lng","").toDouble()
+        textView.text = "${lat}, ${lng}"
 
-        fusedLocationProviderClient.lastLocation
-            .addOnSuccessListener { success: Location? ->
-                success?.let { location ->
-                    textView.text =
-                        "${location.latitude}, ${location.longitude}"
-                    lat = location.latitude
-                    lng = location.longitude
-                }
-            }
-            .addOnFailureListener { fail ->
-                textView.text = fail.localizedMessage
-            }
     }
 
     private fun getTime(textView: TextView){
-        val currentTime : Long = System.currentTimeMillis() // ms로 반환
-        val dataFormat5 = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
-        textView.text = dataFormat5.format(currentTime)
+//        val currentTime : Long = System.currentTimeMillis() // ms로 반환
+//        val dataFormat5 = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+//        textView.text = dataFormat5.format(currentTime)
+        val dateInfo = MyApplication.prefs.getString("dateInfo", "")
+        textView.text = dateInfo
     }
 
     private fun getImageFromCamera(){
@@ -323,5 +341,25 @@ class UserReportActivity : AppCompatActivity() {
             filePath = it.getString(columnIndex)
         }
         return filePath
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

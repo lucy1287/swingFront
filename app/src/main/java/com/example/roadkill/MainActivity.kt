@@ -138,18 +138,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) : Boolean {
         return when (item.itemId) {
-            R.id.menu_item1 -> {
-                MyApplication.prefs.setString("id", "no id")
-                val intent = Intent(applicationContext, LoginActivity::class.java)
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
                 return true
             }
-            R.id.menu_item2 -> {
-                val intent = Intent(applicationContext, UserMyReportActivity::class.java)
-                startActivity(intent)
+            R.id.item2 -> {
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onBackPressed() {
+        //super.onBackPressed();
+    }
+
 }

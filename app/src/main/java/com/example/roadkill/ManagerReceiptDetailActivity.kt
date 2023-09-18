@@ -6,6 +6,9 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -47,14 +50,8 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
         binding.tvBtnOk.setOnClickListener{
                 postManagerUpdate(rid)
                 Toast.makeText(applicationContext, "처리가 완료되었습니다", Toast.LENGTH_SHORT).show()
-                if(MyApplication.prefs.getString("memberType", "false") == "true") {
-                    val intent = Intent(applicationContext, ManagerMainActivity::class.java)
-                    startActivity(intent)
-                }
-                else{
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                }
+                val intent = Intent(applicationContext, ManagerHistoryActivity::class.java)
+                startActivity(intent)
         }
 
 //        receiptImageRVAdapter = ReceiptImageRVAdapter(receiptImageList, this)
@@ -89,6 +86,20 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
                         if (responseData != null) {
                             binding.tvAccidentDateInfo.text = responseData.accidentTime
                             binding.tvAccidentLocationInfo.text = "(" + responseData.lat + " , " + responseData.lng + ")"
+                            binding.tvAccidentCauseInfo.text = responseData.cause
+                            binding.tvAccidentOtherInfo.text= responseData.otherInfoByUser
+                            binding.tvSpeciesResultInfo.text = responseData.species
+                            if(responseData.species == "너구리" || responseData.species == "노루" ||
+                                responseData.species == "고라니" || responseData.species == "멧돼지")
+                                binding.tvSpeciesResultInfo.text = responseData.species
+                            else if(responseData.species == "raccoon")
+                                binding.tvSpeciesResultInfo.text = "너구리"
+                            else if(responseData.species == "roe deer")
+                                binding.tvSpeciesResultInfo.text = "노루"
+                            else if(responseData.species == "water deer")
+                                binding.tvSpeciesResultInfo.text = "고라니"
+                            else if(responseData.species == "wild boar")
+                                binding.tvSpeciesResultInfo.text = "멧돼지"
 
                             //이미지 표시
                             val imgPart = ApiClient.BASE_URL + responseData.img.replace("\\", "/")
@@ -111,7 +122,9 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
     }
 
     private fun postManagerUpdate(rid: String) {
-        var managerUpdateJson = ManagerUpdateRequest("고라니", "no", "", true)
+        var managerUpdateJson = ManagerUpdateRequest(
+            binding.tvSpeciesResultInfo.text.toString(),
+            binding.tvAccidentCauseInfo.text.toString(), "", true)
 
         ReportService.retrofitPostManagerUpdate(managerUpdateJson, rid)
             .enqueue(object : Callback<String> { // 응답 타입을 String으로 지정
@@ -135,7 +148,25 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
             })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.manager_menu, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, ManagerMainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
 
 

@@ -32,12 +32,18 @@ class ManagerMainActivity : AppCompatActivity() {
         setContentView(binding.root)
         requestPermission()
 
-        binding.clRoadkillReceipt.setOnClickListener{
+        binding.tvBtn2.setOnClickListener{
+            MyApplication.prefs.setString("id", "no id")
+            val intent = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.clHistory.setOnClickListener{
             val intent = Intent(applicationContext, ManagerHistoryActivity::class.java)
             startActivity(intent)
         }
 
-        binding.clEcoCorridor.setOnClickListener{
+        binding.clMap.setOnClickListener{
             val intent = Intent(applicationContext, UserRoadkillMapActivity::class.java)
             startActivity(intent)
         }
@@ -107,6 +113,7 @@ class ManagerMainActivity : AppCompatActivity() {
         builder.show()
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.manager_menu, menu)
@@ -115,10 +122,12 @@ class ManagerMainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) : Boolean {
         return when (item.itemId) {
-            R.id.menu_item1 -> {
-                MyApplication.prefs.setString("id", "no id")
-                val intent = Intent(applicationContext, LoginActivity::class.java)
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, ManagerMainActivity::class.java)
                 startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
                 return true
             }
             else -> super.onOptionsItemSelected(item)

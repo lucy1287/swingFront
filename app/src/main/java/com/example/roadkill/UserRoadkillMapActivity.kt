@@ -2,9 +2,13 @@ package com.example.roadkill
 
 import android.Manifest
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -153,5 +157,25 @@ class UserRoadkillMapActivity: AppCompatActivity(), OnMapReadyCallback {
                 Log.e("TAG", "실패원인: {$t}")
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

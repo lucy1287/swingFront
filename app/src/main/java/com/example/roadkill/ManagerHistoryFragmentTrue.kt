@@ -32,7 +32,7 @@ class ManagerHistoryFragmentTrue : Fragment() {
         managerHistoryRVAdapter.setOnItemClickListener(object : ManagerHistoryRVAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int) {
                 val rid = accidentHistoryList[pos].rid
-                val intent = Intent(activity, ManagerReceiptDetailActivity::class.java)
+                val intent = Intent(activity, ManagerReceiptDetailTrueActivity::class.java)
                 intent.putExtra("rid", rid)
                 startActivity(intent)
             }
@@ -76,12 +76,20 @@ class ManagerHistoryFragmentTrue : Fragment() {
                                 val rid = report.rid
                                 val lat = report.lat
                                 val lng = report.lng
-                                val species = report.species
+                                var species = report.species
                                 val cause = report.cause
                                 val otherInfo = report.otherInfoByUser
                                 val status = report.status
                                 val accidentTime = report.accidentTime
                                 // 여기에서 데이터를 사용하세요.
+                                if(species == "raccoon")
+                                    species = "너구리"
+                                else if(species == "roe deer")
+                                    species= "노루"
+                                else if(species == "water deer")
+                                    species = "고라니"
+                                else if(species == "wild boar")
+                                    species = "멧돼지"
                                 accidentHistoryList.add(History(rid, accidentTime, species))
                                 Log.d("accidentHistoryList", accidentHistoryList.toString())
                                 managerHistoryRVAdapter.notifyDataSetChanged();

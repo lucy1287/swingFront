@@ -2,15 +2,22 @@ package com.example.roadkill
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.roadkill.databinding.ActivityNaverMapBinding
+import com.google.android.gms.location.LocationServices
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
@@ -24,6 +31,8 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityNaverMapBinding
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
+    private var nowLatitude: Double = 0.0
+    private var nowLongitude: Double = 0.0
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 5000
     private val marker = Marker()
@@ -45,7 +54,9 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.tvBtn1.setOnClickListener{
-            binding.root.removeAllViews()
+           // binding.root.removeAllViews()
+            getLocation()
+
             if(MyApplication.prefs.getString("selection", "") == "big"){
                 val intent = Intent(applicationContext, InjuredActivity::class.java)
                 startActivity(intent)
@@ -100,4 +111,46 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback {
         // 위치를 추적하면서 카메라도 따라 움직인다.
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
     }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        val fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this)
+
+        fusedLocationProviderClient.lastLocation
+            .addOnSuccessListener { success: Location? ->
+                success?.let { location ->
+//                    textView.text =
+//                        "${location.latitude}, ${location.longitude}"
+                    nowLatitude = location.latitude
+                    nowLongitude = location.longitude
+                    MyApplication.prefs.setString("lat",nowLatitude.toString())
+                    MyApplication.prefs.setString("lng",nowLongitude.toString())
+                }
+            }
+            .addOnFailureListener { fail ->
+               // textView.text = fail.localizedMessage
+            }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

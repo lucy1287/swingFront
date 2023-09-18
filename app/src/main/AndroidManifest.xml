@@ -56,6 +56,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".ManagerReceiptDetailTrueActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".ManagerMapActivity"
             android:exported="false">
         </activity>

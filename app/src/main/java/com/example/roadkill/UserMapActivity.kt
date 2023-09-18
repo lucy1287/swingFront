@@ -150,4 +150,5 @@ class UserMapActivity : AppCompatActivity() {
                 Log.d("getLocation",fail.localizedMessage)
             }
     }
+
 }

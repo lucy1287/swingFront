@@ -138,11 +138,13 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/tv_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/stroke_round_background"
-            android:text="다시 불러오기 >"
+            android:id="@+id/tv_again"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:background="@drawable/green_round_stroke_background"
+            android:text="다시 불러오기"
+            android:textAlignment="center"
+            android:gravity="center"
             android:textSize="12sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

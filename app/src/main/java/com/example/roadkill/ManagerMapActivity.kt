@@ -1,7 +1,11 @@
 package com.example.roadkill
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roadkill.databinding.ActivityUserMapBinding
@@ -111,5 +115,25 @@ class ManagerMapActivity : AppCompatActivity() {
     fun Double.roundTo(decimals: Int): Double {
         val factor = 10.0.pow(decimals.toDouble())
         return (this * factor).roundToInt() / factor
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.manager_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, ManagerMainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -147,7 +147,7 @@
         android:id="@+id/tv_btn_ok"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="처리 완료로 변경"
+        android:text="확인"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/white"

@@ -22,23 +22,23 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnLogin.setOnClickListener{
-            val id = binding.etId.text.toString()
+        binding.tvBtn1.setOnClickListener{
+            val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text .toString()
 
-            if(id == "10000" && password == "1234") {
+            if(email == "10000" && password == "1234") {
                 Toast.makeText(this, "사용자로 로그인 되었습니다", Toast.LENGTH_SHORT).show()
                 MyApplication.prefs.setString("memberType", "false")
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
             }
-            if(id == "20000" && password == "1234") {
+            if(email == "manager@gmail.com" && password == "1234") {
                 Toast.makeText(this, "관리자로 로그인 되었습니다", Toast.LENGTH_SHORT).show()
                 MyApplication.prefs.setString("memberType", "true")
                 val intent = Intent(applicationContext, ManagerMainActivity::class.java)
                 startActivity(intent)
             }
-            else if(id == null){
+            else if(email == null){
                 Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             else if(password == null){
@@ -51,14 +51,14 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.tvSignup.setOnClickListener{
+        binding.tvBtn2.setOnClickListener{
             val intent = Intent(applicationContext, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun postReportFun() {
-        var email = binding.etId.text.toString()
+        var email = binding.etEmail.text.toString()
         var pwd = binding.etPassword.text.toString()
         var loginJson = LoginRequest(email, pwd)
         Log.d("dsds", loginJson.toString())

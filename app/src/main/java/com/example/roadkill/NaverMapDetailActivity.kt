@@ -5,6 +5,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -105,8 +108,18 @@ class NaverMapDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         naverMap.locationTrackingMode = LocationTrackingMode.Follow  //위치 추적하면서 카메라도 따라 이동
 
         naverMap.setOnMapLongClickListener { point, coord ->  // 지도 롱 클릭 시 마커 생성
+            Toast.makeText(
+                this, "${coord.latitude.roundTo(6)}, ${coord.longitude.roundTo(6)}",
+                Toast.LENGTH_SHORT
+            ).show()
             marker.position = LatLng(coord.latitude, coord.longitude)
             marker.map = naverMap
+            MyApplication.prefs.setString("lat", coord.latitude.roundTo(6).toString())
+            MyApplication.prefs.setString("lng",coord.longitude.roundTo(6).toString())
+            Log.d("위도", MyApplication.prefs.getString("lat", ""))
+
+            binding.tvBtn2.setBackgroundResource(R.drawable.green_round_background)
+            binding.tvBtn2.isEnabled = true
         }
     }
 
@@ -202,5 +215,25 @@ class NaverMapDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 //            .addOnFailureListener { fail ->
 //                Log.d("getLocation",fail.localizedMessage)
 //            }
-//    }
+//  }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

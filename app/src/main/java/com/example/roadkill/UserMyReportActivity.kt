@@ -4,6 +4,9 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -69,12 +72,20 @@ class UserMyReportActivity: AppCompatActivity() {
                             val rid = report.rid
                             val lat = report.lat
                             val lng = report.lng
-                            val species = report.species
+                            var species = report.species
                             val cause = report.cause
                             val otherInfo = report.otherInfoByUser
                             val status = report.status
                             val accidentTime = report.accidentTime
                             // 여기에서 데이터를 사용하세요.
+                            if(species == "raccoon")
+                                species = "너구리"
+                            else if(species == "roe deer")
+                                species= "노루"
+                            else if(species == "water deer")
+                                species = "고라니"
+                            else if(species == "wild boar")
+                                species = "멧돼지"
                             accidentHistoryList.add(History(rid, accidentTime, species))
                             Log.d("accidentHistoryList", accidentHistoryList.toString())
                             userMyReportRVAdapter.notifyDataSetChanged();
@@ -94,6 +105,26 @@ class UserMyReportActivity: AppCompatActivity() {
                 Log.e("TAG", "실패원인: {$t}")
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

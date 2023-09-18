@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSignUp.setOnClickListener{
+        binding.tvBtn2.setOnClickListener{
             if(!userSelected && managerSelected) {
                 Toast.makeText(
                     this@SignUpActivity,

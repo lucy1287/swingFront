@@ -17,7 +17,7 @@
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="차에서 나와서 사고발생 현장 사진을 찍어주세요"
+        android:text="동물의 크기는 어떤가요?"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
