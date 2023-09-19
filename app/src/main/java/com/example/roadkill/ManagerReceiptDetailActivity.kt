@@ -1,6 +1,7 @@
 package com.example.roadkill
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.location.Location
 import android.net.Uri
@@ -9,8 +10,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -46,6 +49,29 @@ class ManagerReceiptDetailActivity : AppCompatActivity() {
             getManagerDetailFun(rid)
         }
 
+        binding.tvSpeciesChange.setOnClickListener {
+            val dialogView = layoutInflater.inflate(R.layout.dialog_input, null)
+            val inputEditText: EditText = dialogView.findViewById(R.id.inputEditText)
+
+            val alertDialog = AlertDialog.Builder(this)
+                .setTitle("변경할 동물종을 입력하세요.")
+                .setView(dialogView)
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+                    // 사용자가 "확인" 버튼을 클릭했을 때 처리할 코드
+                    val managerInput = inputEditText.text.toString()
+                    // 입력된 텍스트를 화면에 표시
+                    binding.tvSpeciesResultInfo.text = managerInput
+                    // 여기에서는 간단히 토스트 메시지로 출력합니다.
+                  //  Toast.makeText(this, "입력된 텍스트: $userInput", Toast.LENGTH_SHORT).show()
+                })
+                .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
+                    // 사용자가 "취소" 버튼을 클릭했을 때 처리할 코드
+                    dialog.dismiss()
+                })
+                .create()
+
+            alertDialog.show()
+        }
         //처리하기 버튼
         binding.tvBtnOk.setOnClickListener{
                 postManagerUpdate(rid)

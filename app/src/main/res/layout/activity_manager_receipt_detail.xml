@@ -141,6 +141,19 @@
             app:layout_constraintTop_toTopOf="@+id/tv_species_result"
             app:layout_constraintStart_toEndOf="@+id/tv_species_result"/>
 
+        <TextView
+            android:id="@+id/tv_species_change"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:text="변경"
+            android:background="@drawable/green_round_stroke_background"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@+id/tv_species_result"
+            app:layout_constraintStart_toEndOf="@+id/tv_species_result_info"
+            android:layout_marginLeft="20dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

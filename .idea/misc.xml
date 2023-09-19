@@ -15,7 +15,7 @@
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/drawable/stroke_round_background.xml" value="0.1405" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/drawable/stroke_round_background_large.xml" value="0.1605" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/drawable/white_round_background_main.xml" value="0.1055" />
-        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_animal_center.xml" value="0.1" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_animal_center.xml" value="0.2" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_animal_status.xml" value="0.2" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_call911.xml" value="0.264" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_camera.xml" value="0.152" />
@@ -54,6 +54,7 @@
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_user_report.xml" value="0.176" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_user_report_detail.xml" value="0.5306513409961686" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/activity_user_roadkill_map.xml" value="0.125" />
+        <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/dialog_input.xml" value="0.13802083333333334" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/fragment_manager_history.xml" value="0.1" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/fragment_manager_history_list.xml" value="0.16614583333333333" />
         <entry key="..\:/Users/hayeo/AndroidStudioProjects/RoadKill/app/src/main/res/layout/item_image.xml" value="0.1" />

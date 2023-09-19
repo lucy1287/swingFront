@@ -44,7 +44,7 @@ class ManagerMainActivity : AppCompatActivity() {
         }
 
         binding.clMap.setOnClickListener{
-            val intent = Intent(applicationContext, UserRoadkillMapActivity::class.java)
+            val intent = Intent(applicationContext, ManagerRoadkillMapActivity::class.java)
             startActivity(intent)
         }
 

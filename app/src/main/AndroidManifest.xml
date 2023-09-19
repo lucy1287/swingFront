@@ -34,10 +34,6 @@
             android:name=".SignUpActivity"
             android:exported="false">
         </activity>
-        <activity
-            android:name=".UserMainActivity"
-            android:exported="false">
-        </activity>
 
         <activity
             android:name=".UserMapActivity"
@@ -137,6 +133,10 @@
         </activity>
         <activity
             android:name=".UserRoadkillMapActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".ManagerRoadkillMapActivity"
             android:exported="false">
         </activity>
 
